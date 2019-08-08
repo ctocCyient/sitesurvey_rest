@@ -121,5 +121,4 @@ public class User implements Serializable {
 	public void setRegion(String region) {
 		this.region = region;
 	}
-
 }
