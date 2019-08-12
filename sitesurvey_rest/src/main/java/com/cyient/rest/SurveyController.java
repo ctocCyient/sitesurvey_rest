@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cyient.dao.SiteAccessRepository;
 import com.cyient.dao.SiteRepository;
+import com.cyient.dao.TechnicianRepository;
 import com.cyient.dao.UserRepository;
 import com.cyient.model.Rest_Response;
 import com.cyient.model.Site;
@@ -26,9 +27,12 @@ import com.cyient.model.Site_Access;
 import com.cyient.model.Site_Access_json;
 import com.cyient.model.User;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 @CrossOrigin(origins = "*", allowedHeaders = "*")
-@RestController  
+@RestController
+@RequestMapping("/sitesurvey_rest")
 public class SurveyController {
 
 	@Autowired
@@ -41,12 +45,13 @@ public class SurveyController {
 	private SiteAccessRepository siteaccessRepo;
 	
 	@Autowired
+	private TechnicianRepository technicianrepositoryRepo;
+	
+	@Autowired
 	private Rest_Response response;
 	
 	@Autowired
 	private User UserObj;
-	
-	
 	
 
 	/*@Autowired
@@ -111,11 +116,37 @@ public class SurveyController {
 		return userRepo.findById(username);	    	
 	}  
 	
+	@GetMapping(path="/authenticate/{username}/{password}", produces = "application/json")  
+	public String getauthenticate(@PathVariable("username") String username,@PathVariable("password") String password){ 
+		int o = 0;
+		try {
+			User userobj = new User();
+			userobj = userRepo.findByCredentials(username, password);
+			System.out.println(userobj.getUsername());	
+			
+			if(userobj.getUsername().equals(username)) {
+				System.out.println(gson.toJson(technicianrepositoryRepo.findByTechnicianId(username)));
+				return gson.toJson(technicianrepositoryRepo.findByTechnicianId(username));
+			}
+			else
+			{
+				response.setStatus("Authentication Failed");
+				return gson.toJson(response);
+			}
+		}
+		catch(Exception e)
+		{
+			response.setStatus("Authentication Failed");
+			return gson.toJson(response);
+		}
+	}  
+	
+	
 	@GetMapping(path="/getSiteAccess/{siteId}", produces = "application/json")  
 	public Site_Access_json getSiteAccess(@PathVariable("siteId") String siteId){ 
 		Site s = new Site();
 		s.setSiteid(siteId);
-		Site_Access obj = siteaccessRepo.fetchDataBySiteID(s);
+		Site_Access obj = siteaccessRepo.findBySiteid(s);
 		Site_Access_json o =  new Site_Access_json();
 		o.setAccessType(obj.getAccessType());
 		o.setSiteid(obj.getSiteid().getSiteid());
@@ -124,10 +155,18 @@ public class SurveyController {
 	} 
 	
 	
-	/*@GetMapping(path="/getSites", produces = "application/json")  
-	public Site getSites(){ 
-		    	return Dao.getSites();
-	}  */
-	
+	@GetMapping(path="/test", produces = "application/json")  
+	public String getSites(){ 
+		/*JsonObject obj = new JsonObject();
+		Site s = new Site();
+		s.setSiteid("IND001");
+		JsonArray a = new JsonArray();
+		a.add(gson.toJson(siteaccessRepo.findBySiteid(s)));
+		obj.add("Site",a);
+		    	return gson.toJson(obj);
+	}
+	*/
+	 return gson.toJson(technicianrepositoryRepo.findByTechnicianId("kiran"));
+	}
 }  
 

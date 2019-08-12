@@ -10,11 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.springframework.stereotype.Component;
-
 
 @Entity
-@Component
 @Table(name = "Site")
 public class Site implements Serializable {
 
@@ -24,16 +21,59 @@ public class Site implements Serializable {
 	@Column(name="siteID")
 	private String siteid;	
 
-	@Column(name="Region")
-	private String Region;	
-
-	@Column(name="latitude")
+	@Column(name="Latitude")
 	private String latitude;
 	
-	@Column(name="longitude")
+	@Column(name="Longitude")
 	private String longitude;
 	
+	@Column(name="Region")
+	private String region;	
 	
+	@Column(name="State")
+	private String state;
+	
+	@Column(name="City")
+	private String city;
+	
+	@Column(name="District")
+	private String district;
+	
+	@Column(name="Site_Type")
+	private String site_type;
+		
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getDistrict() {
+		return district;
+	}
+
+	public void setDistrict(String district) {
+		this.district = district;
+	}
+
+	public String getSite_type() {
+		return site_type;
+	}
+
+	public void setSite_type(String site_type) {
+		this.site_type = site_type;
+	}
+
 	public String getSiteid() {
 		return siteid;
 	}
@@ -42,13 +82,12 @@ public class Site implements Serializable {
 		this.siteid = siteid;
 	}
 
-	
 	public String getRegion() {
-		return Region;
+		return region;
 	}
 
 	public void setRegion(String region) {
-		Region = region;
+		this.region = region;
 	}
 
 	public String getLatitude() {

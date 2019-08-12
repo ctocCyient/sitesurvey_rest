@@ -12,9 +12,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.stereotype.Component;
 
-
-@Entity
 @Component
+@Entity
 @Table(name = "Users")
 public class User implements Serializable {
 
@@ -121,4 +120,5 @@ public class User implements Serializable {
 	public void setRegion(String region) {
 		this.region = region;
 	}
+
 }
