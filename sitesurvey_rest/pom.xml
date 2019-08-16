@@ -4,7 +4,7 @@
   http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.javatpoint</groupId>  
-    <artifactId>new-spring-boot-example2</artifactId>  
+    <artifactId>sitesurvey_rest</artifactId>  
     <version>0.0.1-SNAPSHOT</version>  
     <packaging>jar</packaging>  
     <name>Site survey rest</name>  
