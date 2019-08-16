@@ -122,10 +122,10 @@ public class SurveyController {
 		try {
 			User userobj = new User();
 			userobj = userRepo.findByCredentials(username, password);
-			System.out.println(userobj.getUsername());	
+			//System.out.println(userobj.getUsername());	
 			
 			if(userobj.getUsername().equals(username)) {
-				System.out.println(gson.toJson(technicianrepositoryRepo.findByTechnicianId(username)));
+				//System.out.println(gson.toJson(technicianrepositoryRepo.findByTechnicianId(username)));
 				return gson.toJson(technicianrepositoryRepo.findByTechnicianId(username));
 			}
 			else
