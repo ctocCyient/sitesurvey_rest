@@ -167,6 +167,7 @@ public class SurveyController {
 	}
 	*/
 	 return gson.toJson(technicianrepositoryRepo.findByTechnicianId("kiran"));
+		//return "Hello";
 	}
 }  
 
